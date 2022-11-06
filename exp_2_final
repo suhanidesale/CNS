@@ -1,0 +1,45 @@
+import operator
+
+def decrypt(text, d_key):
+    decryted_text = ''    
+    for c in text:
+        decryted_text += chr(ord(c) - d_key)
+        # if ord == 32:
+        #   decryted_text += 
+    return decryted_text
+
+
+arr=['e','a','r','i','o','t','n','s','l','c','u','d','p','m','h','g','b','f','y','w','k','v','x','z','j','q']
+text= 'slaztllaavupnoahaaolwhyr'
+count=[]
+e_key = 3
+
+encryted_text = ''
+for c in text:
+    encryted_text += chr(ord(c) + e_key)
+
+print(encryted_text)
+
+all_freq = {}
+  
+for i in encryted_text:
+    if i in all_freq:
+        all_freq[i] += 1
+    else:
+        all_freq[i] = 1
+
+sorted_d = dict( sorted(all_freq.items(), key=operator.itemgetter(1),reverse=True))
+print(sorted_d)
+
+for key in sorted_d:
+    for i in arr:
+        guess_key = abs(ord(key) - ord(i))
+        print(guess_key)
+        guess = decrypt(encryted_text, guess_key)
+        print(guess)
+        # result = d.check(guess)
+        # print(guess)
+        if(guess):
+            break
+    if(guess):
+        break
